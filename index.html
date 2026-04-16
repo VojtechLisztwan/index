@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rozcestník Projektů | Vojto</title>
     <style>
-        /* CSS Proměnné pro snadnou změnu barev */
         :root {
             --bg-color: #121212;
             --text-color: #ffffff;
@@ -14,7 +13,6 @@
             --hover-bg: #2c2c2c;
         }
 
-        /* Světlý režim */
         body.light-mode {
             --bg-color: #f0f2f5;
             --text-color: #1a1a1a;
@@ -59,7 +57,6 @@
             font-size: 1.1rem;
         }
 
-        /* Grid pro karty */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -68,7 +65,6 @@
             max-width: 800px;
         }
 
-        /* Styl jednotlivé karty */
         .card {
             background-color: var(--card-bg);
             border-radius: 16px;
@@ -116,7 +112,6 @@
             line-height: 1.5;
         }
 
-        /* Tlačítko pro změnu motivu */
         .theme-toggle {
             margin-top: 4rem;
             padding: 12px 24px;
@@ -145,13 +140,13 @@
     </header>
 
     <div class="grid">
-        <a href="https://vojtechlisztwan.github.io/money_web/" class="card" target="_blank" rel="noopener noreferrer">
+        <a href="https://vojtechlisztwan.github.io/money_web/" class="card">
             <div class="icon">💰</div>
             <h2>Money Web</h2>
             <p>Aplikace pro správu a přehled osobních financí.</p>
         </a>
 
-        <a href="https://vojtechlisztwan.github.io/teplomer/" class="card" target="_blank" rel="noopener noreferrer">
+        <a href="https://vojtechlisztwan.github.io/teplomer/" class="card">
             <div class="icon">🌡️</div>
             <h2>Teploměr</h2>
             <p>Sledování, záznam a vizualizace teplotních dat.</p>
@@ -161,14 +156,11 @@
     <button class="theme-toggle" id="themeBtn">☀️ Světlý režim</button>
 
     <script>
-        // JS pro přepínání tmavého a světlého režimu
         const themeBtn = document.getElementById('themeBtn');
         const body = document.body;
 
         themeBtn.addEventListener('click', () => {
             body.classList.toggle('light-mode');
-            
-            // Změna textu na tlačítku podle aktivního režimu
             if (body.classList.contains('light-mode')) {
                 themeBtn.textContent = '🌙 Tmavý režim';
             } else {
@@ -176,15 +168,12 @@
             }
         });
 
-        // JS pro jemnou animaci karet při načtení stránky
         document.addEventListener("DOMContentLoaded", () => {
             const cards = document.querySelectorAll('.card');
             cards.forEach((card, index) => {
-                // Výchozí stav (skryto a posunuto dolů)
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(30px)';
                 
-                // Zpožděné zobrazení pro kaskádový efekt
                 setTimeout(() => {
                     card.style.transition = 'all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1)';
                     card.style.opacity = '1';
