@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rozcestník Projektů | Vojto</title>
+    <style>
+        /* CSS Proměnné pro snadnou změnu barev */
+        :root {
+            --bg-color: #121212;
+            --text-color: #ffffff;
+            --card-bg: #1e1e1e;
+            --accent: #00d2ff;
+            --hover-bg: #2c2c2c;
+        }
+
+        /* Světlý režim */
+        body.light-mode {
+            --bg-color: #f0f2f5;
+            --text-color: #1a1a1a;
+            --card-bg: #ffffff;
+            --accent: #0056b3;
+            --hover-bg: #f8f9fa;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2rem;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+            letter-spacing: 1px;
+        }
+
+        p.subtitle {
+            color: #888;
+            font-size: 1.1rem;
+        }
+
+        /* Grid pro karty */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        /* Styl jednotlivé karty */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.light-mode .card {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            background-color: var(--hover-bg);
+            box-shadow: 0 15px 35px rgba(0, 210, 255, 0.1);
+        }
+
+        .icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .icon {
+            transform: scale(1.1);
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            line-height: 1.5;
+        }
+
+        /* Tlačítko pro změnu motivu */
+        .theme-toggle {
+            margin-top: 4rem;
+            padding: 12px 24px;
+            border: 2px solid var(--accent);
+            background: transparent;
+            color: var(--accent);
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent);
+            color: var(--bg-color);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Moje Projekty</h1>
+        <p class="subtitle">Rozcestník webových aplikací</p>
+    </header>
+
+    <div class="grid">
+        <a href="https://vojtechlisztwan.github.io/money_web/" class="card" target="_blank" rel="noopener noreferrer">
+            <div class="icon">💰</div>
+            <h2>Money Web</h2>
+            <p>Aplikace pro správu a přehled osobních financí.</p>
+        </a>
+
+        <a href="https://vojtechlisztwan.github.io/teplomer/" class="card" target="_blank" rel="noopener noreferrer">
+            <div class="icon">🌡️</div>
+            <h2>Teploměr</h2>
+            <p>Sledování, záznam a vizualizace teplotních dat.</p>
+        </a>
+    </div>
+
+    <button class="theme-toggle" id="themeBtn">☀️ Světlý režim</button>
+
+    <script>
+        // JS pro přepínání tmavého a světlého režimu
+        const themeBtn = document.getElementById('themeBtn');
+        const body = document.body;
+
+        themeBtn.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            
+            // Změna textu na tlačítku podle aktivního režimu
+            if (body.classList.contains('light-mode')) {
+                themeBtn.textContent = '🌙 Tmavý režim';
+            } else {
+                themeBtn.textContent = '☀️ Světlý režim';
+            }
+        });
+
+        // JS pro jemnou animaci karet při načtení stránky
+        document.addEventListener("DOMContentLoaded", () => {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                // Výchozí stav (skryto a posunuto dolů)
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                
+                // Zpožděné zobrazení pro kaskádový efekt
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1)';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 150 * (index + 1));
+            });
+        });
+    </script>
+</body>
+</html>
